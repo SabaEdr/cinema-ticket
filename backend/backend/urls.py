@@ -15,19 +15,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
-
-from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.shortcuts import redirect
+from rest_framework.routers import DefaultRouter
+from tickets.views import MovieViewSet
 
-def redirect_to_admin(request):
-    return redirect('/admin/')
+
+router = DefaultRouter()
+router.register(r'movies', MovieViewSet)
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  
-    path('', redirect_to_admin),  
+    path('admin/', admin.site.urls),  # مسیر ادمین
+    path('movies/', include(router.urls)),    
 ]
+
+
 
