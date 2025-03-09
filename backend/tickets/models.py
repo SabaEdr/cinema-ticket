@@ -1,15 +1,19 @@
 from django.db import models
 
+from django.db import models
+
 class Movie(models.Model):
-    title = models.CharField(max_length=255)  
+    title = models.CharField(max_length=255)  # نام فیلم
     director = models.CharField(max_length=255)  
     genre = models.CharField(max_length=100)  
     duration = models.IntegerField()  
     release_date = models.DateField()  
     description = models.TextField()  
+    poster_image = models.ImageField(upload_to='movie_posters/', null=True, blank=True)  # فیلد جدید برای تصویر پوستر فیلم
 
     def __str__(self):
         return self.title
+
     
 
 class Cinema(models.Model):

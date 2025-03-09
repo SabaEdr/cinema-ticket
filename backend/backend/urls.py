@@ -16,7 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
+from django.contrib import admin
+from django.urls import path
+from django.shortcuts import redirect
+
+def redirect_to_admin(request):
+    return redirect('/admin/')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),  
+    path('', redirect_to_admin),  
 ]
+
