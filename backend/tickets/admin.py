@@ -1,15 +1,10 @@
 from django.contrib import admin
-from .models import Movie, Cinema, Hall, Showtime, Seat, Reservation
+from .models import Movie, Cinema, Showtime
 
 admin.site.register(Movie)
 admin.site.register(Cinema)
-admin.site.register(Hall)
 admin.site.register(Showtime)
-admin.site.register(Seat)
-admin.site.register(Reservation)
 
+#user:admin pass:123
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ('title', 'director', 'genre', 'release_date', 'poster_image')  # اضافه کردن فیلد تصویر به لیست
-
-
-
+    list_display = ('title', 'director', 'genre', 'release_date', 'poster_image')  # اضافه کردن پوستر به لیست

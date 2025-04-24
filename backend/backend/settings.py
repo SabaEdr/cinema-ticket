@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
-    'rest_framework',  # اضافه کردن Django REST Framework
+    'rest_framework',
     'tickets',  # اپ مدیریت سینما
 ]
 
