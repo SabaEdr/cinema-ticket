@@ -98,14 +98,17 @@ celerybeat-schedule.*
 *.sage.py
 
 # Environments
-.env
-.venv
-env/
 venv/
+VENV/
+.venv/
+env/
 ENV/
-env.bak/
-venv.bak/
-venv/*.cfg
+
+# Python virtualenv config (all cases)
+pyvenv.cfg
+*/pyvenv.cfg
+**/pyvenv.cfg
+/pyvenv.cfg
 
 # mkdocs documentation
 /site
