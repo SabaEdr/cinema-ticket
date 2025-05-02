@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'tickets',  # اپ مدیریت سینما
+    'payment',
 ]
 
 
