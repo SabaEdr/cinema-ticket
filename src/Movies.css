@@ -1,0 +1,272 @@
+html {
+  scroll-behavior: smooth;
+}
+*{
+  cursor: default;
+  direction: rtl;
+  font-family: 'Vazir', sans-serif;
+}
+
+.banner {
+  display: flex;
+  width: 98%;
+  height: auto;
+  background: url("/img/banner-cause-of-death-unknown-movie.jpg") no-repeat;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;     
+  background-position: center;
+  border-radius: 16px;
+  margin: auto;
+  margin-top: 1px;
+}
+
+.movie-container { 
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+
+}
+
+
+.movie-card {
+  display: flex;
+  flex-direction: row-reverse;
+  background: #fff;
+}
+
+.movie-poster {
+  margin-top: -21px;
+  margin-left: 80px;
+  width: 300px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.movie-poster p{
+  padding-left: 10px;
+  font-size: 13px;
+  margin-top: 20px;
+  direction: ltr;
+  color: rgb(177, 177, 177);
+}
+
+.recommend{
+  margin-top: 100px;
+  justify-content: left;
+  align-items: center;
+  margin-right: 60px;
+  
+}
+.recommend img{
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+.poster-image{
+  border-radius: 12px;
+}
+
+.extra{
+  top: 0;
+  z-index: 999;
+  top: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  margin-right: 110px;
+  margin-bottom: -3px;
+  direction: rtl;
+  gap: 3px;
+  .custom-navbar{
+    position: none;
+    background-color: red;
+  }
+}
+
+
+.extra span{
+  margin-left: 30px;
+  margin-bottom: 0;
+} 
+
+.extra_film:hover,.extra_fa:hover,.extra_info:hover {
+  color: #39d;
+  cursor: pointer; 
+}
+
+.extra .extra_nazar:hover,.extra .extra_rating:hover{
+  color: #39d;
+  cursor: pointer; 
+}
+
+
+.extra_arrow{
+  font-size: 11px;
+  margin-right: -10px;
+}
+
+.extra a{
+  text-decoration: none;
+  padding-left: 10px;
+  font-size: 11px;
+  color: black;
+}
+
+.extra_title{
+  margin-right: -25px;
+  margin-top: -5px;
+}
+
+.extra_fa{
+  margin-right: -4px;
+  margin-top: -4px;
+  color: rgb(177, 177, 177);
+}
+
+.extra_rating {
+  display: flex;
+  justify-content: center;  
+  align-items: center;    
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 1px solid #ccc;  
+  font-size: 12px;
+  color: rgb(0, 69, 138); 
+  margin-top: -6px;
+  margin-right: -27px;
+}
+
+.extra_nazar{
+  margin-top: -4px;
+  font-size: 13px;
+  margin-right: -5px;
+}
+.extra_info{
+  margin-right: -20px;
+  font-size: 13px;
+  color: rgb(0, 69, 138);
+  margin-top: -2px;
+}
+
+.movie-info {
+  flex: 1;
+  padding-left: 24px;
+  font-style: rtl;  
+  color: black;
+  border-top: 1px solid rgb(226, 226, 226);
+  margin-right: 70px;
+  margin-top: -20px;
+  font-size: 15px;
+  margin-bottom: 700px;
+}
+
+.movie-description {
+  margin-bottom: 12px;
+  line-height: 1.6;
+  padding-bottom: 20px;
+}
+
+.movie-details {
+  margin-bottom: 8px;
+  padding-bottom: 20px;
+  direction: rtl;
+}
+
+.movie-genre {
+  border-top: 1px solid rgb(226, 226, 226);
+  border-bottom: 1px solid rgb(226, 226, 226);
+  padding-top: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 50px;
+}
+
+.genre-box {
+  display: flex;
+  width: fit-content;
+  border: 1px solid #ccc;
+  border-radius: 8px; 
+  background-color: #f8f8f8; 
+  overflow: hidden;
+  box-shadow: 0 0 4px rgba(0,0,0,0.1);
+  border:0.1px solid rgb(43, 43, 43);
+}
+
+.genre-item {
+  padding: 10px;
+  font-size: 16px;
+  padding-right: 25px;
+  padding-left: 25px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.genre-item:hover{
+  background-color: #f3f3f3;
+}
+
+.genre-item:not(:last-child) {
+  border-left: 1.5px solid rgba(0, 0, 0, 0.1); 
+
+}
+
+.genre-item.genre{
+  padding: 10px;
+  background-color: rgb(226, 224, 224);
+  border-left: 1px solid black;
+
+}
+
+.rating-container {
+  margin-top: -42rem;
+  margin-left: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #39d;
+  scroll-margin-top: 100px;
+  
+}
+
+.rating-container:hover{
+  color: lightgray;
+}
+
+.star {
+  font-size: 22px;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.star-item{
+  display: inline;
+  margin-left: 30px;
+}
+
+.rank{
+  margin: 10px;
+  color: black;
+  margin-right: 0.5rem;
+  padding-top: 6px;
+  font-size: 40px;
+}
+
+.people{
+  margin-top: 0;
+  color: black;
+}
+.rate-number{
+  color: rgba(121, 121, 121, 0.505);
+  font-size: 20px;
+  padding-top: 100px;
+}
+
+.star.gold {
+  color: gold;
+}
+
+.star.gray {
+  color: lightgray;
+}
