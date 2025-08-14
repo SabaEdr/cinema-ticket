@@ -1,0 +1,56 @@
+{% extends "ticketing/base_page.html" %}
+{% load static %}
+
+{% block title %}
+    فهرست سینماها
+{% endblock %}
+
+{% block toolbar_title %}
+    <h4 class="fw-bold mb-0">
+        <i class="fas fa-list me-2"></i>
+        فهرست سینماها
+    </h4>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 py-4">
+        {% if cinemas %}
+            {% for cinema in cinemas %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <a href="{% url "ticketing:cinema_details" cinema_id=cinema.id %}" class="text-decoration-none text-dark">
+                            <div class="card-body text-center">
+                                {% if cinema.image %}
+                                    <img src="{{ cinema.image.url }}" class="card-img-top img-fluid mb-3 rounded" alt="{{ cinema.name }}">
+                                {% else %}
+                                    <i class="fas fa-film fa-6x text-muted mb-3"></i>
+                                {% endif %}
+                                <h5 class="card-title fw-bold mt-2">{{ cinema.name }}</h5>
+                                {% if cinema.city %}
+                                    <p class="card-text text-muted mb-0">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        {{ cinema.city }}
+                                    </p>
+                                {% endif %}
+                                <p class="card-text text-muted">
+                                    ظرفیت: {{ cinema.capacity }} نفر
+                                </p>
+                            </div>
+                        </a>
+                        <div class="card-footer bg-white border-0 text-center">
+                            <a href="{% url "ticketing:cinema_details" cinema_id=cinema.id %}" class="btn btn-primary btn-sm rounded-pill px-4">
+                                مشاهده جزئیات
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-danger text-center shadow-sm" role="alert">
+                    در حال حاضر هیچ سینمایی برای نمایش وجود ندارد.
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

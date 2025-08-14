@@ -1,0 +1,106 @@
+{% extends "ticketing/base_page.html" %}
+{% load static %}
+
+{% block title %}
+    مشاهده بلیت
+{% endblock %}
+
+{% block toolbar_title %}
+    <h4 class="fw-bold mb-0">
+        <i class="fas fa-ticket-alt me-2"></i>
+        مشاهده بلیت
+    </h4>
+{% endblock %}
+
+{% block toolbar_buttons %}
+    <a class="btn btn-warning py-1 px-3 rounded-pill" href="{% url "ticketing:ticket_list" %}">
+        <i class="fas fa-list me-2"></i>
+        فهرست بلیت‌ها
+    </a>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row py-4 justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card p-4 h-100 shadow-lg border-0">
+                <div class="row g-4 item-details">
+                    <div class="col-12 text-center text-md-start">
+                        <h5 class="fw-bold text-primary mb-2">اطلاعات بلیت شما</h5>
+                        <hr class="mt-0 mb-4">
+                    </div>
+
+                    <div class="col-md-6 order-md-2 text-center">
+                        <div class="d-flex justify-content-center align-items-center h-100">
+                            <img class="img-fluid rounded border p-2" src="{% static "ticketing/images/qrcode.png" %}" alt="ticket_qrcode" style="max-width: 200px;">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 order-md-1">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-user-circle me-2"></i>
+                                    خریدار:
+                                </small>
+                                <span class="fw-bold fs-5 text-dark">{{ ticket.customer }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-clock me-2"></i>
+                                    زمان خرید:
+                                </small>
+                                <span class="fw-bold">{{ ticket.order_time|date:"Y/n/j - H:i" }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-chair me-2"></i>
+                                    تعداد صندلی:
+                                </small>
+                                <span class="fw-bold">{{ ticket.seat_count }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <h5 class="fw-bold text-primary mb-2">جزئیات نمایش</h5>
+                        <hr class="mt-0 mb-4">
+                    </div>
+
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-film me-2"></i>
+                            فیلم:
+                        </small>
+                        <span class="fw-bold">{{ ticket.showtime.movie.name }}</span>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-building me-2"></i>
+                            سینما:
+                        </small>
+                        <span class="fw-bold">{{ ticket.showtime.cinema.name }}</span>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <small class="text-muted d-block">
+                            <i class="far fa-clock me-2"></i>
+                            شروع سانس:
+                        </small>
+                        <span class="fw-bold">{{ ticket.showtime.start_time|date:"l Y/n/j ساعت H:i" }}</span>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <hr>
+                        <div class="alert alert-warning p-3 small mt-2" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <span class="fw-bold">
+                                حتماً ۳۰ دقیقه قبل از شروع نمایش فیلم، در سینما حضور داشته باشید.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends "ticketing/base_page.html" %}
+{% load static %}
+
+{% block title %}
+     {{ showtime.movie.name }}
+{% endblock %}
+
+{% block toolbar_title %}
+    <h4 class="fw-bold mb-0">
+        <i class="fas fa-play-circle me-2"></i>
+        {{ showtime.movie.name }}
+        <span class="small text-muted">
+            ({{ showtime.start_time|date:"l ساعت H:i" }})
+        </span>
+    </h4>
+{% endblock %}
+
+{% block toolbar_buttons %}
+    <a class="btn btn-warning py-1 px-3 rounded-pill" href="{% url "ticketing:showtime_list" %}">
+        <i class="fas fa-list me-2"></i>
+        فهرست سانس‌ها
+    </a>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row py-4">
+        <div class="col-lg-8 col-md-7 col-sm-12">
+            <div class="card p-4 h-100 shadow-sm">
+                <div class="row g-3 item-details">
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-film me-2"></i>
+                            نام فیلم:
+                        </small>
+                        <span class="fw-bold">{{ showtime.movie.name }}</span>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-building me-2"></i>
+                            نام سینما:
+                        </small>
+                        <span class="fw-bold">{{ showtime.cinema.name }}</span>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="far fa-clock me-2"></i>
+                            شروع سانس:
+                        </small>
+                        <span class="fw-bold">{{ showtime.start_time|date:"l Y/n/j ساعت H:i" }}</span>
+                    </div>
+
+                    <div class="col-sm-6 d-flex align-items-end justify-content-end">
+                        {% if showtime.status == showtime.SALE_OPEN %}
+                            <span class="badge rounded-pill p-2
+                                {% if showtime.free_seats < 10 %}
+                                    bg-danger
+                                {% else %}
+                                    bg-success
+                                {% endif %}">
+                                {{ showtime.free_seats }} صندلی مانده
+                            </span>
+                        {% else %}
+                            <span class="badge rounded-pill bg-dark p-2">
+                                {{ showtime.get_status_display }}
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            آدرس سینما:
+                        </small>
+                        <div class="item-text-box bg-light rounded p-3 mt-2">
+                            {{ showtime.cinema.address }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-5 col-sm-12 text-center mt-3 mt-md-0">
+            <div class="card p-3 h-100 shadow-sm d-flex flex-column justify-content-between">
+                <div>
+                    <img class="img-fluid rounded shadow-sm mb-4" src="{{ showtime.movie.poster.url }}" alt="{{ showtime.movie.name }}">
+                </div>
+
+                {% if showtime.status == showtime.SALE_OPEN %}
+                    <div class="card-body bg-light rounded text-center p-3">
+                        <h6 class="text-muted mb-2">قیمت بلیت:</h6>
+                        <span class="fw-bold fs-4 text-primary">{{ showtime.price }} تومان</span>
+                        <form action="" method="post" class="mt-3">
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <select name="seat_count" class="form-select form-select-sm">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    خرید
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+
+                {% if error %}
+                    <div class="alert alert-danger p-2 small mt-3" role="alert">
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                        {{ error }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "ticketing/base_page.html" %}
+{% load static %}
+
+{% block title %}
+     {{ movie.name }}
+{% endblock %}
+
+{% block toolbar_title %}
+    <h4 class="fw-bold mb-0">
+        <i class="fas fa-film me-2"></i>
+        {{ movie.name }}
+    </h4>
+{% endblock %}
+
+{% block toolbar_buttons %}
+    <a class="btn btn-warning py-1 px-3 rounded-pill" href="{% url "ticketing:movie_list" %}">
+        <i class="fas fa-list me-2"></i>
+        فهرست فیلم‌ها
+    </a>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row py-4">
+        <div class="col-lg-8 col-md-7 col-sm-12">
+            <div class="card p-4 h-100">
+                <div class="row g-3 item-details">
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-user-tie me-2"></i>
+                            کارگردان:
+                        </small>
+                        <span class="fw-bold">{{ movie.director }}</span>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            محصول سال:
+                        </small>
+                        <span class="fw-bold">{{ movie.year }}</span>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-clock me-2"></i>
+                            مدت زمان:
+                        </small>
+                        <span class="fw-bold">{{ movie.length }} دقیقه</span>
+                    </div>
+
+                    <div class="col-12 mt-4">
+                        <small class="text-muted d-block">
+                            <i class="fas fa-book-open me-2"></i>
+                            داستان فیلم:
+                        </small>
+                        <div class="item-text-box bg-light rounded p-3 mt-2">
+                            {{ movie.description }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-5 col-sm-12 text-center mt-3 mt-md-0">
+            <div class="card p-3 h-100 d-flex align-items-center justify-content-center">
+                {% if movie.poster %}
+                    <img class="img-fluid rounded shadow-sm" src="{{ movie.poster.url }}" alt="{{ movie.name }}">
+                {% else %}
+                    <i class="far fa-10x fa-film text-muted"></i>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

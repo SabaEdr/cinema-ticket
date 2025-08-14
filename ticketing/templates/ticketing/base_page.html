@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% block extra_headers %}{% endblock %}
+
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">-->
+
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujmOUwz1G2o4l3eI/x+JgP/q2E5z0O6RjE3wN1Pz1z8d3a7O1Q2iJ7JqGqg4U1Q5wJ5wJ5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
+
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/main_custom.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/all.min.css" %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body dir="rtl">
+<div class="container-fluid" id="main-container">
+    <div class="row align-items-center py-4" id="header">
+    <div class="col text-center">
+        <img src="{% static "ticketing/images/logo.png" %}" alt="لوگوی تیکت چی" class="img-fluid" style="max-height: 100px;">
+    </div>
+    </div>
+    <div class="row align-items-center py-3 sticky-top" id="toolbar">
+        <div class="col-6">
+            <h4 class="mb-0">
+                {% block toolbar_title %}{% endblock %}
+            </h4>
+        </div>
+        <div class="col-6 d-flex justify-content-end align-items-center">
+            <div class="btn-group me-3" role="group">
+            {% block toolbar_buttons %}
+                <a class="btn btn-outline-light" href="{% url "ticketing:movie_list" %}">
+                <i class="fa fa-film" aria-hidden="true"></i>
+                    فیلم‌ها
+                </a>
+                <a class="btn btn-outline-light" href="{% url "ticketing:cinema_list" %}">
+                <i class="fa fa-building" aria-hidden="true"></i>
+                    سینماها
+                </a>
+                <a class="btn btn-success" href="{% url "ticketing:showtime_list" %}">
+                    <i class="fa fa-barcode" aria-hidden="true"></i>
+                    خرید بلیت
+                </a>
+            {% endblock %}
+              </div>
+            {% block user_button %}
+                {% if user.is_authenticated %}
+                  <div class="custom-dropdown">
+    <button class="custom-dropdown-btn">
+        <i class="fas fa-user"></i>
+        {{ user.get_full_name }}
+    </button>
+    <ul class="custom-dropdown-menu">
+        <li><a href="{% url "accounts:profile_details" %}">نمایه کاربری</a></li>
+        <li><a href="{% url "ticketing:ticket_list" %}">بلیت‌های من</a></li>
+        <li><a href="{% url "accounts:payment_list" %}">پرداخت‌های من</a></li>
+        <li><a href="{% url "accounts:logout" %}">خروج</a></li>
+    </ul>
+</div>
+                {% else %}
+                    <a class="btn btn-primary" href="{% url "accounts:login" %}">
+                        <i class="fas fa-sign-in-alt me-2"></i>
+                        ورود
+                    </a>
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <div class="container my-5">
+        {% block main_content %}{% endblock %}
+    </div>
+
+    <div class="row" id="footer">
+        <div class="project-title">
+    <span>پروژه رزرو بلیت سینما - درس مهندسی نرم افزار ۲ - ترم ۴۰۳۲ - آقای دکتر شجاع</span>
+</div>
+<div class="group-members">
+    <span>اعضای گروه: صبا عفتی - پویا امید - آریا رافع - سبحان صفرزاده - محمد حسین زاده</span>
+<!--    <span >اعضای گروه: صبا عفتی- <span style="filter: blur(5px);">پویا امید - آریا رافع - سبحان صفرزاده - محمد حسین زاده</span></span>-->
+
+</div>
+    </div>
+</div>
+
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nb+0Ixh9" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nb+0Ixh9" crossorigin="anonymous"></script>-->
+<link rel="stylesheet" type="text/css" href="{% static "ticketing/js/bootstrap.bundle.js" %}">
+{% block extra_js %}{% endblock %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var dropdowns = document.querySelectorAll('.custom-dropdown');
+
+    dropdowns.forEach(function(dropdown) {
+        var button = dropdown.querySelector('.custom-dropdown-btn');
+        var menu = dropdown.querySelector('.custom-dropdown-menu');
+
+        button.addEventListener('click', function() {
+            menu.classList.toggle('show');
+        });
+
+        // بستن منو با کلیک در خارج از آن
+        document.addEventListener('click', function(event) {
+            if (!dropdown.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>
