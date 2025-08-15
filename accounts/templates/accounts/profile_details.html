@@ -1,0 +1,98 @@
+{% extends "accounts/base_accounts.html" %}
+{% load static %}
+
+{% block title %}نمایه کاربری{% endblock %}
+
+{% block toolbar_title %}
+    <h4 class="fw-bold mb-0">
+        <i class="fas fa-user-circle me-2"></i>
+        نمایه کاربری
+    </h4>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row py-4 justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow-lg p-5 border-0">
+                <div class="row g-4">
+                    <div class="col-md-4 text-center">
+                        <div class="d-flex flex-column align-items-center">
+                            {% if profile.profile_image %}
+                                <img class="profile-image img-fluid rounded-circle border border-2 border-primary mb-3" src="{{ profile.profile_image.url }}" alt="{{ profile.user.username }}" style="width: 150px; height: 150px; object-fit: cover;">
+                            {% else %}
+                                <i class="fas fa-user-circle text-muted mb-3" style="font-size: 150px;"></i>
+                            {% endif %}
+
+                            <h5 class="fw-bold mb-1">{{ user.get_full_name|default:user.username }}</h5>
+                            <p class="text-muted small">@{{ user.username }}</p>
+
+                            <hr class="w-75 my-3">
+
+                            <div class="d-grid gap-2 w-100">
+                                <a class="btn btn-secondary rounded-pill" href="{% url "accounts:profile_edit" %}">
+                                    <i class="fas fa-edit me-2"></i>
+                                    ویرایش نمایه
+                                </a>
+                                <a class="btn btn-warning rounded-pill" href="{% url 'accounts:password_change' %}">
+                                    <i class="fas fa-key me-2"></i>
+                                    تغییر گذرواژه
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <h5 class="fw-bold text-primary mb-4">اطلاعات شخصی</h5>
+
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-envelope me-2"></i>
+                                    ایمیل:
+                                </small>
+                                <span class="fw-bold">{{ user.email|default:"-" }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-birthday-cake me-2"></i>
+                                    تاریخ تولد:
+                                </small>
+                                <span class="fw-bold">{{ profile.birth_date|date:"Y/n/j"|default:"-" }}</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <small class="text-muted d-block">
+                                    <i class="fas fa-mobile-alt me-2"></i>
+                                    تلفن همراه:
+                                </small>
+                                <span class="fw-bold">{{ profile.mobile|default:"-" }}</span>
+                            </div>
+                            <div class="col-sm-6">
+    <small class="text-muted d-block">
+        <i class="fas fa-coins me-2"></i>
+        اعتبار:
+    </small>
+    <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold text-success">
+            {{ profile.get_balance_display }}
+        </span>
+        <a class="btn btn-sm btn-success rounded-pill" href="{% url "accounts:payment_create" %}">
+            <i class="fas fa-plus"></i>
+            افزایش
+        </a>
+    </div>
+</div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h5 class="fw-bold text-primary mt-3">آدرس</h5>
+                                <hr class="mt-0 mb-3">
+                                <p class="item-text-box bg-light rounded p-3">{{ profile.address|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "accounts/base_accounts.html" %}
+{% load static %}
+
+{% block title %}ورود کاربران{% endblock %}
+
+{% block toolbar_title %}
+    <h4 class="fw-bold mb-0">
+        <i class="fas fa-user me-2"></i>
+        ورود کاربران
+    </h4>
+{% endblock %}
+
+{% block main_content %}
+    <div class="row justify-content-center py-4">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <div class="card shadow-sm p-4">
+                <form action="" method="post" class="login-form">
+                    {% csrf_token %}
+
+                    {% if error %}
+                        <div class="alert alert-danger text-center" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            {{ error }}
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3 row">
+                        <label for="id_username" class="col-sm-3 col-form-label">نام کاربری:</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" id="id_username" name="username" value="{{ username|default:'' }}" required>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="id_password" class="col-sm-3 col-form-label">گذرواژه:</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="password" id="id_password" name="password" required>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center pt-3">
+                        <div class="col-sm-6">
+                            <button type="submit" class="btn btn-success w-100 rounded-pill">
+                                <i class="fas fa-sign-in-alt me-2"></i>
+                                ورود
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr class="my-4">
+
+                <div class="text-center">
+                    <p class="mb-2">حساب کاربری ندارید؟</p>
+                    <a href="{% url 'accounts:register' %}" class="btn btn-outline-primary w-50 rounded-pill">
+                        <i class="fas fa-user-plus me-2"></i>
+                        ثبت‌نام کنید
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
