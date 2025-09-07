@@ -63,28 +63,6 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('accounts:login'))
 
 
-def register_view(request):
-    if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse('ticketing:showtime_list'))
-    
-    if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            # این خط را اضافه کنید: ایجاد یک پروفایل برای کاربر جدید
-            Profile.objects.create(user=user)
-            
-            login(request, user)
-            return HttpResponseRedirect(reverse('ticketing:showtime_list'))
-    else:
-        form = CustomUserCreationForm()
-    
-    context = {
-        'form': form
-    }
-    return render(request, 'accounts/register.html', context)
-
-
 @login_required
 def profile_details(request):
     profile = request.user.profile
@@ -94,7 +72,7 @@ def profile_details(request):
     return render(request, 'accounts/profile_details.html', context)
 
 
-def register_sajad(request):
+def register_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse('ticketing:showtime_list'))
 
@@ -147,7 +125,7 @@ def payment_create(request):
 def profile_edit(request):
     if request.method == 'POST':
         user_form = MyUserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, files=request.FILES, instance=request.user.profile)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -160,6 +138,3 @@ def profile_edit(request):
         'profile_form': profile_form
     }
     return render(request, 'accounts/profile_edit.html', context)
-
-def password_change_done_view(request):
-    return render(request, 'accounts/password_change_done.html')

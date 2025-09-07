@@ -1,20 +1,4 @@
-# محیط مجازی
-venv/
-env/
-
-# فایل‌های موقتی پایتون
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-
-# فایل‌های لاگ
-*.log
-
-# فایل‌های موقتی IDE
-.vscode/
 .idea/
-
-# Static و media که تولیدی هستن
-/staticfiles/
-/media/
+env/
+*.sqlite3
+media/

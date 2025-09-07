@@ -50,9 +50,7 @@ class ShowTime(models.Model):
         verbose_name = 'سانس'
         verbose_name_plural = 'سانس'
 
-    # read more about on_delete from
-    # https://docs.djangoproject.com/en/2.2/ref/models/fields/#django.db.models.ForeignKey.on_delete
-    # choices are PROTECT, CASCADE, SET_NULL, SET_DEFAULT, SET(), DO_NOTHING
+
     movie = models.ForeignKey('Movie', on_delete=models.PROTECT, verbose_name='فیلم')
     cinema = models.ForeignKey('Cinema', on_delete=models.PROTECT, verbose_name='سینما')
 

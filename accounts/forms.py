@@ -49,7 +49,7 @@ class MyUserForm(UserChangeForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['mobile', 'gender', 'address', 'profile_image']
+        fields = ['mobile', 'gender', 'address']
 # از این فرم برای ثبت‌نام استفاده کنید
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
